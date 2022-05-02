@@ -17,7 +17,7 @@ class Perro:
         return self._caricias < 2
 
 #INTERFAZ (mensajes que entiende): comer y acariciar
-#ESTADO (ej energía): energia
+#ESTADO (atributos, ej energía): energia
 
 #2)
     def volar(self, kms):
@@ -111,24 +111,55 @@ print(calculadora.multiplicar(2))
 print(calculadora.valor_actual())
 
 #7)
-class Gorriones:
+class Gorrión:
     def __init__(self):
-        self.alimento = 0
+        self.listaGramos = []
+        self.listaKms = []
         self.gramos = 0
-        self.vuelo = 0
         self.kilometros = 0
 
     def volar(self, kms):
-        self.vuelo += 1
+        self.listaKms.append(kms)
         self.kilometros += kms
 
     def comer(self, gramos):
-        self.alimento += 1
+        self.listaGramos.append(gramos)
         self.gramos += gramos
 
     def CSS(self):
-        return self.kilometros / self.gramos
+        if self.gramos > 0:
+            return self.kilometros / self.gramos
+        else:
+            return None    
+
+    def CSSP(self):
+        return max(self.listaKms) / max(self.listaGramos) #vez que mas volo / #vez que mas comio
+
+    def CSSV(self):
+        return len(self.listaKms) / len(self.listaGramos) #cantidad de veces que volo / cant de veces que comio        
+
+    def estaEnEquilibrio(self):
+        return 0.5 <= self.CSS() <= 2
+
+#Un objeto es un ente computacional que con el que podemos comunicarnos mediante mensajes
+#y puede (o no) tener un estado interno (referencias a otros objetos).
     
-                    
+#los objetos pueden tener estado (en el caso de pepita, su estado es la energía), el cual puede cambiar 
+#a lo largo del tiempo. El estado es el conjunto de atributos de un objeto.                   
+#Estado dinamico de los valores que contemplan (ej la energia va cambiando)
+
+#Instancia de una clase es la creacion concreta de una cosa.
+#CLASE la abstraccion o la descripcion gnral de los objetos.
+#INTERFAZ: mensajes que entiende --> Polimorfismo (tiene que existir un tercer objeto (observador))
 
 
+#PRACTICA 2 POO
+
+#2
+# def estaEnEquilibrio(self):
+#return (self.energia >= 150 and self.energia <= 300)
+
+# ESTADO: alimento y caricias
+# INTERFAZ: conjunto de metodos (q mensajes entiende) energia, comer, alimento, etc.
+# comparten interfaz parcialmente
+# hubiese si existiera un tercero q les pudiese mandar mismos mensajes a ambos (ej un humano).
